@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Permanent+Marker&display=swap");
+
+.navbar {
+  width: 100%;
+  background-color: white;
+  font-size: large;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 80px; 
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin: 0 -2rem;
+}
+
+.logoimg {
+  height: 3rem;
+  width: 4rem;
+}
+
+.heading {
+  margin-left: -5px;
+  margin-top: 10px;
+  font-family: "Cinzel", serif;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.profile {
+  display: flex;
+  font-size: x-large;
+  column-gap: 25px;
+  margin-left: 2rem;
+}
+
+.acc {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cart {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+

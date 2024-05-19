@@ -1,0 +1,43 @@
+.footer {
+    background-color: black;
+    color: white;
+    padding: 0 20px;
+}
+
+.footer-part {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.shop {
+    display: flex;
+    justify-content: center;
+    border-right: solid 2px white;
+    padding-right: 10px;
+}
+
+.shop h4 {
+    margin-right: 10px;
+}
+
+.copyright {
+    margin-left: 10px;
+    margin-top: -4px;
+    flex-grow: 1; 
+}
+
+.social {
+    display: flex;
+    gap: 10px;
+    font-size: large;
+}
+
+.icon{
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.icon:hover {
+    transform: scale(1.3);
+}
