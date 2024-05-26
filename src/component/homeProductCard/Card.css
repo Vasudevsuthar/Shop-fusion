@@ -1,33 +1,35 @@
-.product-card-container{
+.product-card-container {
     margin: 40px;
     margin-top: 40px;
 }
 
 .product-card {
-    display: flex;
-    align-items: center;
     background-color: white;
     padding: 20px;
+    width: 100%;
 }
 
-.product-card > div {
+.product-card>div {
+
     display: grid;
+    justify-items: center;
     grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
 }
 
 .product {
+    background-color: #f1f1f1;
+    color: black;
+    margin: 10px;
+    border-radius: 10px;
+    width: 205px;
     padding: 10px;
-    width: 220px;   
     display: flex;
     flex-direction: column;
-    grid-template-columns: (5, 1fr); 
-    columns: 5; 
 }
 
 .card-img {
-    width: 180px;
-    height: 250px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 4px;
     margin-bottom: 8px;
@@ -36,15 +38,13 @@
 }
 
 .card-img:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
-
 .card-title {
-    width: 185px;
     font-size: 1rem;
     font-weight: 500;
-    margin: 8px 0;
+    padding: 10px 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -52,12 +52,12 @@
 
 .card-price {
     font-size: 1rem;
-    margin: 8px 0;
     font-weight: 500;
+    margin: 0;
 }
 
 .card-btn {
-    width: 180px;
+    width: 100%;
     background-color: #007bff;
     color: white;
     border: none;
@@ -69,4 +69,59 @@
 
 .card-btn:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 1245px) {
+    .product-card>div {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 1016px) {
+
+    .product-card>div {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 841px) {
+    .product-card-container{
+        margin: 20px;
+    }
+
+    .product{
+        width: 190px;
+    }
+
+
+}
+
+@media (max-width: 700px){
+    .product-card-container{
+        margin: 20px 0;
+    }
+
+    .product-heading{
+        margin-left: 15px;
+    }
+
+    .product-card{
+        padding: 10px;
+    }
+
+    .product{
+        width: 160px;
+    }
+
+}
+
+
+@media (max-width: 557px){
+    .product-card div{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product{
+        width: 150px;
+    }
 }

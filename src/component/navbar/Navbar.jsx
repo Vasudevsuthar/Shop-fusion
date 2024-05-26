@@ -1,29 +1,25 @@
 import React from "react";
 import logo from "../img/logo.avif";
-import { MdOutlineAccountCircle } from "react-icons/md";
+import Profile from "../profile/Profile";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import "./Navbar.css";
 import SearchBar from "../searchBar/SearchBar";
 
-function navbar() {
+function Navbar() {
   return (
     <div>
       <nav>
         <div className="navbar">
           <div className="logo">
-            <img className="logoimg" src={logo} alt="" />
+            <img className="logoimg" src={logo} alt="Logo" />
             <h3 className="heading">Shop Fusion</h3>
           </div>
-          <div>
+          <div className="search-bar">
             <SearchBar />
           </div>
           <div className="profile">
-            <div className="acc">
-              <MdOutlineAccountCircle />
-            </div>
-            <div className="cart">
-              <MdOutlineShoppingCart />
-            </div>
+              <Profile className="acc" />
+              <MdOutlineShoppingCart className="cart"/>
           </div>
         </div>
       </nav>
@@ -31,4 +27,4 @@ function navbar() {
   );
 }
 
-export default navbar;
+export default Navbar;

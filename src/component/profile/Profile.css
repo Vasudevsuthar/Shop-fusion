@@ -1,0 +1,43 @@
+.main-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    position: relative;
+}
+
+.account {
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    width: 7rem;
+    top: 100%;
+    background-color: rgba(229, 231, 235, 0.75);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 0.5rem;
+    padding: 5px;
+    z-index: 1000;
+}
+
+.dropdown ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: small;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 0.5rem;
+}
+
+.dropdown li:hover {
+    background-color: #c8c8c873;
+}

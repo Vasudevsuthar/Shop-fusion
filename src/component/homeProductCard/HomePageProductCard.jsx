@@ -53,6 +53,16 @@ const productData = [
     quantity: 1,
   },
   {
+    id: 15,
+    image:
+      "https://i.pinimg.com/564x/3e/05/ce/3e05cefbc7eec79ac175ea8490a67939.jpg",
+    title: "Hand Painted Blue Kaushalam Tea Pot in Aluminium",
+    desc: "Shop Hand Painted Blue Kaushalam Tea Pot in Aluminium, handmade by Mrinalika Jain. Fair pricing. Ethically made. Positive impact.",
+    price: 150,
+    trendingProductName: "Exclusive",
+    quantity: 1,
+  },
+  {
     id: 6,
     image:
       "https://i.pinimg.com/736x/e4/61/f2/e461f2246b6ad93e2099d98780626396.jpg",

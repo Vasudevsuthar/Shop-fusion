@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GoSearch } from "react-icons/go";
 import notfound from "../img/notfound.png";
 import "./SearchBar.css";
@@ -43,22 +43,41 @@ const searchDate = [
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
+  const [showResult, setShowResult] = useState(false);
+  const searchRef = useRef(null);
+
   const filterSearchDate = searchDate
     .filter((obj) => obj.name.toLocaleLowerCase().includes(search))
     .slice(0, 8);
 
+  useEffect(() => {
+    const clickOutsideHandle = (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setShowResult(false);
+      }
+    };
+
+    document.addEventListener("mousedown", clickOutsideHandle);
+    return () => {
+      document.removeEventListener("mousedown", clickOutsideHandle);
+    };
+  }, [searchRef]);
+
   return (
-    <div>
+    <div ref={searchRef}>
       <div className="search">
         <GoSearch className="icon" />
         <input
           type="text"
           placeholder="Search Item"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setShowResult(true);
+          }}
         />
       </div>
       <div className="search-container">
-        {search && (
+        {showResult && search && (
           <div className="search-result">
             {filterSearchDate.length > 0 ? (
               <>

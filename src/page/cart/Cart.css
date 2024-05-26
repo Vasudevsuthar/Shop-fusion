@@ -1,0 +1,166 @@
+
+.bag {
+    margin: 50px;
+    margin-bottom: 80px;
+}
+
+.cart-heading{
+    margin-bottom: 40px;
+}
+
+.cart-heading h2{
+    font-weight: bolder;
+}
+
+.main-bag{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.cart-prod {
+    background-color: white;
+    border-radius: 20px;
+    width: 50rem;
+    padding: 20px;
+    padding-bottom: 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+}
+
+th:not(:first-child) {
+    text-align: center;
+}
+
+td {
+    padding: 20px 0;
+}
+
+td:not(:first-child) {
+    text-align: center;
+}
+
+
+tr:nth-child(even) {
+    border-top: 1px solid #ddd;
+}
+
+.prod-img-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.prod-img-name img {
+    width: 120px;
+    height: 150px;
+    border-radius: 10%;
+}
+
+.qty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qty p{
+    margin: 5px;
+}
+
+.qty button {
+    background-color: white;
+    color: #6b6d73;
+    border: 1.5px solid #7f8084;
+    width: 20px; 
+    height: 20px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20%; 
+  }
+
+  .qty button:hover {
+    background-color: #d2e3ef; 
+  }
+
+td span {
+    font-weight: bold;
+}
+
+.cart-details{
+    background-color: white;
+    border-radius: 20px;
+    width: 20rem;
+    height: 100%;
+}
+
+.cart-details h5{
+    font-weight: bold;
+    margin: 0 0 20px 0;
+}
+
+.address{
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid #c5d3de;
+    margin: 20px;
+}
+
+.address input{
+    width: 100%;
+    background-color: #eff3f6;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    padding: 5px 15px;
+    margin: 5px 0;
+}
+
+.add{
+    display: flex;
+    gap: 10px;
+}
+
+.add input{
+    background-color: white;
+    border: 2px solid #beccd6;
+    padding: 3px 12px;
+}
+
+.cart-total{
+    background-color: #ffd28d;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.subtotal{
+    display: flex;
+    justify-content: space-between;
+    font-size: small;
+}
+
+.total{
+    display: flex;
+    justify-content: space-between;
+    font-size: medium;
+    font-weight: bold;
+}
+
+.apply{
+    background-color: white;
+    color: black;
+    border-radius: 50px;
+}
+
+.apply:hover{
+    background-color: #dbe4ea;
+}

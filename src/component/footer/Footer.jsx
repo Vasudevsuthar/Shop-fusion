@@ -9,11 +9,13 @@ function footer() {
   return (
     <div className="footer">
       <div className="footer-part">
-        <div className="shop">
-          <h4>ShopFusion</h4>
-        </div>
-        <div className="copyright">
-          <span>© 2024 shopfusion - @shopfusion</span>
+        <div className="main">
+          <div className="shop">
+            <h4>ShopFusion</h4>
+          </div>
+          <div className="copyright">
+            <span>© 2024 shopfusion - @shopfusion</span>
+          </div>
         </div>
         <div className="social">
           <FaTwitter className="icon" />

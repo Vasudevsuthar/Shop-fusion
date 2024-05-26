@@ -1,7 +1,6 @@
 
 .category {
-    margin: 40px;
-    margin-top: 20px;
+    margin: 20px 40px;
     background-color: white;
     display: flex;
     justify-content: space-between;
@@ -35,4 +34,62 @@
   .cate:hover .cate-Name { 
     color: #066cf2;
   }
+
+
+  @media (max-width: 946px){
+ 
+
+    .img{
+      width: 50px;
+      height: 50px;
+    }
+
+    .cate-Name{
+      font-weight: 600;
+      font-size: large;
+    }
+  }
+
+  @media (max-width: 841px){
+    .category{
+      margin: 20px;
+    }
+    .img{
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  @media (max-width: 700px){
+    .category{
+      margin: 20px 0;
+    }
+  }
+
+  @media (max-width: 625px) {
+    .category {
+      flex-direction: row;
+      align-items: stretch;
+      overflow-y: auto;
+      max-height: 80vh; 
+      gap: 15px;
+    }
   
+    .cate {
+      margin-bottom: 10px;
+    }
+  
+    .cate:last-child {
+      margin-bottom: 0;
+    }
+
+    .img{
+      width: 50px;
+      height: 50px;
+    }
+
+    .cate-Name{
+      font-weight: 700;
+      font-size: medium;
+    }
+  }
