@@ -30,7 +30,7 @@ const Profile = () => {
           <ul>
             {userIsLoggedIn && (
               <>
-                <li>
+                <li onClick={() => navigate("/account")}>
                   <MdOutlineAccountCircle /> My Profile
                 </li>
                 <li>

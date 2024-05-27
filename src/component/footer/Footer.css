@@ -54,8 +54,17 @@
         padding: 0;
     }
 
+    .footer-part{
+        align-items: start;
+    }
+
     .main{
         display: grid;
+        justify-items: start;
+    }
+
+    .copyright{
+        margin: 0;
     }
 
     .shop{

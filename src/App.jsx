@@ -4,6 +4,7 @@ import './App.css';
 import Login from './component/registration/Login';
 import Signup from './component/registration/Signup';
 import Cart from './page/cart/Cart';
+import Account from './page/account/Account';
 
 const App = () => {
 
@@ -15,6 +16,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/account' element={<Account />} />
         </Routes>
       </Router>
     </div>

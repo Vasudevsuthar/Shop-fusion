@@ -1,0 +1,86 @@
+.account-cantainer {
+    margin: 40px;
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
+    border-radius: 3px;
+}
+
+.name {
+    display: flex;
+    gap: 10px;
+    margin: 30px 0;
+}
+
+.account-cantainer input {
+    width: 25rem;
+    border: 0.5px solid rgba(128, 128, 128, 0.288);
+    background-color: #fafafa;
+    outline: none;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.gender {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.gender input{
+    width: 15px;
+}
+
+.gender-male {
+    display: flex;
+    gap: 5px;
+}
+
+.email {
+    margin: 30px 0;
+}
+
+.number {
+    margin-bottom: 60px;
+}
+
+.faqs {
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.question{
+    text-align: center;
+}
+
+.question h6 {
+    font-weight: bold;
+}
+
+
+@media (max-width: 986px){
+    .name{
+        display: grid;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 554px){
+    .account-cantainer input{
+        width: 15rem;
+    }
+
+    .gender input{
+        width: 15px;
+    }
+}
+
+@media (max-width: 394px){
+    .account-cantainer input{
+        width: 10rem;
+    }
+
+    .gender input{
+        width: 15px;
+    }
+}

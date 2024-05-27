@@ -43,7 +43,7 @@ const Cart = () => {
               <tbody>
                 {cardProd.map((prod) => (
                   <tr key={prod.name}>
-                    <td className="prod-img-name">
+                    <td className="prod-img">
                       <div>
                         <img src={prod.image} alt="" />
                       </div>
@@ -54,10 +54,12 @@ const Cart = () => {
                     <td>
                       <span>₹ {prod.price}</span>
                     </td>
-                    <td className="qty">
-                      <button>+</button>
-                      <p>{prod.qty}</p>
-                      <button>-</button>
+                    <td>
+                      <div className="qty">
+                        <button>+</button>
+                        <p>{prod.qty}</p>
+                        <button>-</button>
+                      </div>
                     </td>
                     <td>₹ 999</td>
                   </tr>

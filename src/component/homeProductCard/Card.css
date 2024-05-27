@@ -125,3 +125,9 @@
         width: 150px;
     }
 }
+
+@media (max-width: 380px){
+    .product{
+        width: 130px;
+    }
+}

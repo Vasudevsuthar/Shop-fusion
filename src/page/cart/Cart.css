@@ -41,7 +41,7 @@ th:not(:first-child) {
 }
 
 td {
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 td:not(:first-child) {
@@ -49,17 +49,19 @@ td:not(:first-child) {
 }
 
 
+
 tr:nth-child(even) {
     border-top: 1px solid #ddd;
 }
 
-.prod-img-name {
+
+.prod-img {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.prod-img-name img {
+.prod-img img {
     width: 120px;
     height: 150px;
     border-radius: 10%;
@@ -163,4 +165,107 @@ td span {
 
 .apply:hover{
     background-color: #dbe4ea;
+}
+
+
+@media (min-width: 1308px){
+    .bag{
+        height: 100vh;
+    }
+    .main-bag{
+        justify-content: center;
+    }
+}
+
+@media(max-width: 990px){
+    .cart-heading{
+        display: grid;
+        justify-content: center;
+        margin-bottom: 20px;
+        margin-top: -10px;
+    }
+    .main-bag{
+        display: grid;
+        justify-content: center;
+        justify-items: center;
+    }
+    .cart-details{
+        display: flex;
+        width: 60%;
+    }
+
+    .cart-total{
+        width: 100%;
+    }
+    
+    .subtotal{
+        margin-bottom: 10px;
+        font-size: medium;
+    }
+}
+
+@media (max-width: 823px){
+    .cart-prod{
+        width: 40rem;
+    }
+
+    .cart-details{
+       width: 80%;
+    }
+}
+
+@media (max-width: 655px){
+    .cart-prod{
+        width: 30rem;
+    }
+
+    .prod-img{
+        display: grid;
+        gap: 5px;
+    }
+
+    .prod-img img{
+        width: 80px;
+        height: 100px;
+    }
+
+    .prod-img h5{
+        margin: 0px;
+    }
+
+    .cart-details{
+        display: grid;
+    }
+
+    .cart-total{
+        width: auto;
+    }
+}
+
+@media(max-width: 508px){
+    .cart-prod{
+        width:25rem;
+        font-size: small;
+        padding: 15px;
+        padding-bottom: 0;
+    } 
+
+    .prod-img img{
+        width: 60px;
+        height: 80px;
+    }
+
+    .prod-img h5{
+        font-size: medium;
+    }
+
+    th{
+        padding: 5px;
+    }
+}
+
+@media (max-width: 432px){
+    .cart-prod{
+        width: 18rem;
+    }
 }
