@@ -33,7 +33,7 @@ const Profile = () => {
                 <li onClick={() => navigate("/account")}>
                   <MdOutlineAccountCircle /> My Profile
                 </li>
-                <li>
+                <li onClick={() => navigate("/order")}>
                   <BsBoxSeam /> Orders
                 </li>
                 <li onClick={logoutHandler}>

@@ -5,6 +5,8 @@ import Login from './component/registration/Login';
 import Signup from './component/registration/Signup';
 import Cart from './page/cart/Cart';
 import Account from './page/account/Account';
+import SingleProduct from './page/singleProduct/SingleProduct';
+import OrderPage from './page/orderPage/OrderPage';
 
 const App = () => {
 
@@ -17,6 +19,8 @@ const App = () => {
           <Route path='/signup' element={<Signup />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/account' element={<Account />} />
+          <Route path='/singleprod' element={<SingleProduct />} />
+          <Route path='/order' element={<OrderPage />} />
         </Routes>
       </Router>
     </div>

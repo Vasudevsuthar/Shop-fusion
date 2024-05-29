@@ -71,27 +71,21 @@ const Account = () => {
                 address (or mobile number)?
               </h6>
               <p>
-                Your login email id (or mobile number) changes, likewise. You'll
-                receive all your account related communication on your updated
-                email address (or mobile number).
+              It happens as soon as you confirm the verification code sent to your email (or mobile) and save the changes.
               </p>
               <h6>
                 What happens to my existing Shop-Fusion account when I update my
                 email address (or mobile number)?
               </h6>
               <p>
-                Your login email id (or mobile number) changes, likewise. You'll
-                receive all your account related communication on your updated
-                email address (or mobile number).
+              Updating your email address (or mobile number) doesn't invalidate your account. Your account remains fully functional. You'll continue seeing your Order history, saved information and personal details.
               </p>
               <h6>
                 Does my Seller account get affected when I update my email
                 address?
               </h6>
               <p>
-                Your login email id (or mobile number) changes, likewise. You'll
-                receive all your account related communication on your updated
-                email address (or mobile number).
+              Shop-Fusion has a 'single sign-on' policy. Any changes will reflect in your Seller account also.
               </p>
             </div>
           </div>

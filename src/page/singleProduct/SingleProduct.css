@@ -1,0 +1,145 @@
+.single-prod{
+    background-color: white;
+    padding: 40px 80px;
+    margin: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    text-align: justify;
+    gap: 0px;
+}
+
+.prod-pic img{
+    width: 80%;
+    height: 100%;
+    border-radius: 20px;
+    background-color: #fff;
+}
+
+.prod-info h2{
+    font-weight: 800;
+}
+
+.prod-dis{
+    color: #969ea4;
+}
+
+.prod-price{
+    border-bottom: 1.5px solid rgba(128, 128, 128, 0.256)
+}
+
+.prod-price span{
+    font-size: x-large;
+    font-weight: 800;
+}
+
+.prod-button{
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.qty-button{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: black;
+    font-size: medium;
+    font-weight: 800;
+    background-color: #eff3f6;
+    padding: 0 30px;
+    border-radius: 50px;
+}
+
+.qty-button button{
+    background-color: transparent;
+    color: black;
+    margin: 0 15px;
+    font-weight: 800;
+}
+
+.add-cart{
+    width: 100%;
+    font-size: medium;
+    background-color: black;
+    padding: 0 30px;
+    border-radius: 50px;
+}
+
+.add-cart button{
+    color: #eff3f6;
+    margin: 0;
+    background-color: transparent;
+}
+
+
+@media (max-width: 853px){
+    .single-prod{
+        padding: 40px;
+    }
+
+    .prod-info h2{
+        font-weight: 700;
+        font-size: larger;
+    }
+
+    .qty-button button{
+        margin: 0;
+    }
+}
+
+@media(max-width: 696px){
+    .single-prod{
+        display: grid;
+    }
+
+    .prod-pic {
+        display: flex;
+        justify-content: center;
+    }
+
+    .prod-button{
+        display: grid;
+    }
+    .qty-button button{
+        width: 60px;
+        margin: 0 15px;
+        font-size: large;
+    }
+
+    .add-cart button{
+        font-size: large;
+    }
+
+    .prod-pic{
+        margin-bottom: 40px;
+    }
+
+    .prod-info h2{
+        font-weight: 800;
+        font-size: x-large;
+    }
+}
+
+@media (max-width: 416px){
+    .single-prod{
+        margin: 20px;
+    }
+
+    .prod-info h2{
+        font-weight: 700;
+        font-size: larger;
+    }
+
+    .prod-dis{
+        font-size: small;
+    }
+
+    .qty-button button{
+        width: 40px;
+        margin: 0 5px;
+        font-size: medium;
+    }
+}
