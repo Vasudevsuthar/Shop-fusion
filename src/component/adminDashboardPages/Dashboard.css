@@ -1,0 +1,112 @@
+.prod-head {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 40px;
+}
+
+.prod-head button {
+    background-color: #4491ba;
+    color: #def0fa;
+    border: 2px solid #136fa4;
+    border-radius: 50px;
+    padding: 0 10px;
+}
+
+.prod-head button:hover {
+    background-color: #307ca5;
+}
+
+.prod-table-head {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #d4ebf9;
+    border-radius: 10px;
+    margin: 20px 40px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.prod-table-head p,
+.prod-details p{
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.prod-details {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    color: #67a6cb;
+    border-radius: 10px;
+    margin: 10px 40px;
+    padding: 7px;
+    font-size: large;
+}
+
+.action-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.action-button button {
+    background-color: transparent;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.action-button button:hover {
+    transform: scale(1.3);
+}
+
+@media (max-width: 864px) {
+    .all-prod {
+        margin: 40px;
+        padding: 10px;
+        background-color: #def0fa;
+        border: 2px solid #2a7eae68;
+        border-radius: 20px;
+        overflow-x: auto;
+        display: flex;
+        flex-direction: column;
+        white-space: nowrap;
+    }
+
+    .prod-head,
+    .prod-table-head,
+    .prod-details {
+        flex-direction: row;
+        min-width: 900px;
+    }
+
+}
+
+@media (max-width: 575px) {
+    .prod-head {
+        margin: 10px 20px;
+    }
+
+    .prod-table-head {
+        margin: 10px 20px;
+        padding: 5px;
+        font-weight: bold;
+        font-size: medium;
+    }
+
+    .prod-details {
+        margin: 5px 20px;
+        padding: 6px;
+        font-size: medium;
+    }
+
+    .prod-head,
+    .prod-table-head,
+    .prod-details {
+        min-width: 800px;
+    }
+}

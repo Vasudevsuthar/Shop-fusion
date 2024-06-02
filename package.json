@@ -15,9 +15,11 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "react-icon": "^1.0.0",
     "react-icons": "^5.1.0",
-    "react-router-dom": "^6.23.1"
+    "react-router-dom": "^6.23.1",
+    "react-tabs": "^6.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

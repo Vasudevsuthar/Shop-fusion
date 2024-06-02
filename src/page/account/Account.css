@@ -1,3 +1,26 @@
+.order-profile {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    background-color: #fadaad85;
+    margin: 40px 60px;
+    padding: 20px;
+    border: 2px solid #f3b00570;
+    border-radius: 20px;
+}
+
+.order-profile img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.order-profile p {
+    margin: 0;
+}
+
+
 .account-cantainer {
     margin: 40px;
     padding: 40px;
@@ -5,6 +28,8 @@
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
     border-radius: 3px;
 }
+
+
 
 .name {
     display: flex;
@@ -44,6 +69,23 @@
     margin-bottom: 60px;
 }
 
+.sub-button{
+    display: flex;
+    justify-content: center;
+}
+
+.sub-button button{
+    background-color: #fadaad85;
+    border: 2px solid #f3b00570;
+    border-radius: 10px;
+    padding: 5px 20px;
+    font-size: x-large;
+}
+
+.sub-button button:hover{
+    background-color: #f3b0057d;
+}
+
 .faqs {
     font-weight: bold;
     margin: 20px 0;
@@ -66,6 +108,21 @@
 }
 
 @media (max-width: 554px){
+    .order-profile {
+        margin: 20px 40px;
+        padding: 20px;
+    }
+
+
+    .account-cantainer {
+        margin: 20px;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
+        border-radius: 3px;
+    }
+
+
     .account-cantainer input{
         width: 15rem;
     }

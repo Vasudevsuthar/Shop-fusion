@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from "react";
-
+import toast from "react-hot-toast";
 
 const AuthContext = React.createContext({
   token: "",
   email: "",
+  uid: "",
   isLoggedIn: false,
-  login: (token, email) => {},
+  login: (token, email, uid) => {},
   logout: () => {},
 });
-
 
 export const AuthContextProvider = (props) => {
   let initialToken = localStorage.getItem("token");
   let initialEmail = localStorage.getItem("email");
+  let initialUid = localStorage.getItem("uid");
 
   const [token, setToken] = useState(initialToken);
   const [email, setEmail] = useState(initialEmail);
+  const [uid, setUid] = useState(initialUid);
 
   useEffect(() => {
     localStorage.setItem("token", token);
     localStorage.setItem("email", email);
-  }, [token, email]);
+    localStorage.setItem("uid", uid);
+  }, [token, email, uid]);
 
-  function loginHandler(token, email) {
+  function loginHandler(token, email, uid) {
     setToken(token);
     setEmail(email);
+    setUid(uid);
   }
 
   const userIsLoggedIn = !!token;
@@ -36,15 +40,13 @@ export const AuthContextProvider = (props) => {
     localStorage.removeItem("email");
     setToken("");
     setEmail("");
-    alert("You have been logged out.");
+    toast.success("You have been logged out.");
   };
-
-
-
 
   const contextValue = {
     token: token,
     email: email,
+    uid: uid,
     isLoggedIn: userIsLoggedIn,
     login: loginHandler,
     logout: logoutHandler,

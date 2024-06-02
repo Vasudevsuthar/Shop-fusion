@@ -1,0 +1,91 @@
+.admin-container{
+    color: #2a7dae;
+}
+
+.head{
+    text-align: center;
+    margin: 30px;
+    background-color: #def0fa;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #2a7eae68;
+}
+
+.head h4{
+    margin: 0;
+}
+
+.admin-profile{
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    background-color: #def0fa;
+    margin: 30px;
+    padding: 20px;
+    border: 2px solid #2a7eae68;
+    border-radius: 20px;
+}
+
+.admin-profile img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.admin-profile p {
+    margin: 0;
+}
+
+.details{
+    display: flex;
+    justify-content: center;
+    margin: 0 60px;
+    padding: 0;
+}
+
+.total-product{
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    font-size: x-large;
+    cursor: pointer;
+    justify-items: center;
+    background-color: #def0fa;
+    border: 2px solid #2a7eae68;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 20px;
+}
+
+.prod-icon{
+    margin-bottom: 10px;
+    font-size: 50px;
+}
+
+@media (max-width: 760px){
+    .details{
+        margin: 0 40px;
+        font-size: small;
+    }
+
+    .total-product{
+        font-size: medium;
+        padding: 5px 15px;
+        margin: 10px;
+    }
+
+    .total-product h5{
+        font-size: medium;
+        text-align: center;
+    }
+
+    .prod-icon{
+        margin: 10px;
+        font-size: 30px;
+    }
+}
+
+.react-tabs__tab--selected {
+    border: 2px solid black !important;
+  }

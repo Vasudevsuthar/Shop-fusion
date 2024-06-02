@@ -1,13 +1,18 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import "./Regi.css";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../store/auth-context";
+import toast from "react-hot-toast";
+import Loader from "../../component/loader/Loader";
+import MainContext from "../store/main-context";
 
 const Login = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const authCtx = useContext(AuthContext);
+  const mainCtx = useContext(MainContext);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -15,36 +20,54 @@ const Login = () => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    try {
-      const response = await fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCXgJ4yf8Vrl_XTIYC3w9xAtExM8YkoZTo",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: enteredEmail,
-            password: enteredPassword,
-            returnSecureToken: true,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        authCtx.login(data.idToken, enteredEmail);
-        alert("Login successful");
-        navigate("/");
-      } else {
-        const errorData = await response.json();
-        throw new Error(errorData.error.message);
-      }
-    } catch (error) {
-      alert(error.message);
+    if (enteredEmail === "" || enteredPassword === "") {
+      toast.error("All fields are required");
+      return;
     }
 
+    if (!emailRegex.test(enteredEmail)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    setIsLoading(true);
+
+    setTimeout(async () => {
+      try {
+        const response = await fetch(
+          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCXgJ4yf8Vrl_XTIYC3w9xAtExM8YkoZTo",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              email: enteredEmail,
+              password: enteredPassword,
+              returnSecureToken: true,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+          3000
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          authCtx.login(data.idToken, enteredEmail, data.localId);
+          mainCtx.fetchUserData(data.localId);
+          toast.success("Login successful");
+          navigate("/");
+        } else {
+          const errorData = await response.json();
+          throw new Error(errorData.error.message);
+        }
+      } catch (error) {
+        toast.error(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    },2000);
   };
 
   return (
@@ -74,8 +97,8 @@ const Login = () => {
           <div className="forgot-password">
             <a href="">Forgot Password</a>
           </div>
-          <div>
-            <button>Login</button>
+          <div className="login-button">
+            <button>{isLoading ? <Loader /> : "Login"}</button>
           </div>
         </form>
         <hr />

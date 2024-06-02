@@ -158,13 +158,15 @@ td span {
 }
 
 .apply{
+    width: 100%;
     background-color: white;
+    border: none;
     color: black;
     border-radius: 50px;
 }
 
 .apply:hover{
-    background-color: #dbe4ea;
+    background-color: #eff3f6;
 }
 
 

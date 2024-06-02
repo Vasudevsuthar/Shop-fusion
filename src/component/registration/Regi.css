@@ -74,7 +74,7 @@ hr {
     transform: scale(1.1);
 }
 
-button {
+.login-button button {
     width: 100%;
     padding: 8px;
     margin-top: 12px;
@@ -87,7 +87,7 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+.login-button button:hover {
     background-color: #197FA5;
 }
 
@@ -122,7 +122,7 @@ button:hover {
         margin: 0 20px;
     }
 
-    button {
+    .login-button button {
         padding: 6px;
         font-size: 0.9rem;
     }

@@ -10,16 +10,6 @@ const OrderPage = () => {
   return (
     <Layout>
       <div className="order-component">
-        <div className="order-profile">
-          <img src={ProfileImg} alt="" />
-          <p>
-            <strong>Name : </strong>Vasudev
-          </p>
-          <p>
-            <strong>Email : </strong>
-            {email}
-          </p>
-        </div>
         <div className="order-info">
           <h2>Order Details</h2>
           <div className="order-summary">
