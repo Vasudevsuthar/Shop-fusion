@@ -86,15 +86,14 @@ const SignUp = () => {
         const formattedTime = formatTime(new Date());
 
         await fetch(
-          `https://shop-fushion-default-rtdb.firebaseio.com/usersData/${uid}.json`,
+          "https://shop-fushion-default-rtdb.firebaseio.com/usersData.json",
           {
-            method: "PUT",
+            method: "POST",
             body: JSON.stringify({
               firstName: enteredName,
               email: enteredEmail,
               signUpDate: formattedDate,
               signUpTime: formattedTime,
-              userId: uid,
             }),
             headers: {
               "Content-Type": "application/json",

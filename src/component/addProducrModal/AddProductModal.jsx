@@ -1,19 +1,30 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import toast from "react-hot-toast";
 import Loader from "../loader/Loader";
 import MainContext from "../store/main-context";
 
-const AddProductModal = ({ onClose }) => {
+const AddProductModal = ({ onClose, isEditMode, productData, onSubmit }) => {
   const productNameRef = useRef();
   const productImageRef = useRef();
   const productPriceRef = useRef();
+  const specificCategorieRef = useRef();
   const productCategoryRef = useRef();
   const productDiscRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
-  const mainCtx = useContext(MainContext);
 
-  const addProductHandler = (e) =>{
+  useEffect(() => {
+    if (isEditMode && productData) {
+      productNameRef.current.value = productData.name;
+      productImageRef.current.value = productData.image;
+      productPriceRef.current.value = productData.price;
+      specificCategorieRef.current.value = productData.specificCategorie;
+      productCategoryRef.current.value = productData.category;
+      productDiscRef.current.value = productData.description;
+    }
+  }, [isEditMode, productData]);
+
+  const addOrEditProductHandler = (e) => {
     e.preventDefault();
 
     const newProd = {
@@ -21,10 +32,11 @@ const AddProductModal = ({ onClose }) => {
       image: productImageRef.current.value,
       price: productPriceRef.current.value,
       category: productCategoryRef.current.value,
+      specificCategorie: specificCategorieRef.current.value,
       description: productDiscRef.current.value,
     };
 
-    if (!newProd.name || !newProd.image || !newProd.price || !newProd.category || !newProd.description) {
+    if (!newProd.name || !newProd.image || !newProd.price || !newProd.category || !newProd.specificCategorie || !newProd.description) {
       toast.error("Please fill in all fields correctly");
       return;
     }
@@ -33,20 +45,23 @@ const AddProductModal = ({ onClose }) => {
 
     setTimeout(async () => {
       try {
-        const res = await fetch(
-          "https://shop-fushion-default-rtdb.firebaseio.com/productData.json",
-          {
-            method: "POST",
-            body: JSON.stringify(newProd),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const url = isEditMode 
+          ? `https://shop-fushion-default-rtdb.firebaseio.com/productData/${productData.id}.json`
+          : "https://shop-fushion-default-rtdb.firebaseio.com/productData.json";
+
+        const method = isEditMode ? "PUT" : "POST";
+
+        const res = await fetch(url, {
+          method: method,
+          body: JSON.stringify(newProd),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         if (!res.ok) {
           const data = await res.json();
-          let errorMessage = "Add Product failed";
+          let errorMessage = isEditMode ? "Edit Product failed" : "Add Product failed";
           if (data && data.error && data.error.message) {
             errorMessage = data.error.message; 
           }
@@ -54,43 +69,39 @@ const AddProductModal = ({ onClose }) => {
         }
 
         const data = await res.json();
-        toast.success("Product Added successfully");
-        mainCtx.fetchProductData();
-        onClose()
+        toast.success(isEditMode ? "Product Edited successfully" : "Product Added successfully");
+        onSubmit();
+        onClose();
       } catch (err) {
         toast.error(err.message);
       } finally {
         setIsLoading(false);
       }
     }, 2000);
-
-  }
+  };
 
   return (
     <Modal show onHide={onClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Add Product</Modal.Title>
+        <Modal.Title>{isEditMode ? "Edit Product" : "Add Product"}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
           <Form.Group className="mb-3" controlId="productName">
-            <Form.Label>Product Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter product name"
               ref={productNameRef}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="productName">
-            <Form.Label>Product Image</Form.Label>
+          <Form.Group className="mb-3" controlId="productImage">
             <Form.Control
               type="text"
-              placeholder="Enter product Image URl"
+              placeholder="Enter product Image URL"
               ref={productImageRef}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="productPrice">
-            <Form.Label>Product Price</Form.Label>
             <Form.Control
               type="number"
               placeholder="Enter product price"
@@ -98,25 +109,32 @@ const AddProductModal = ({ onClose }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="productCategory">
-            <Form.Label>Product Category</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter product category"
-              ref={productCategoryRef}
-            />
+            <Form.Select ref={productCategoryRef}>
+              <option value="">Select Product Category</option>
+              <option value="electronics">Electronics</option>
+              <option value="clothing">Clothing</option>
+              <option value="home-appliances">Home Appliances</option>
+            </Form.Select>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="productCategory">
-            <Form.Label>Product Discription</Form.Label>
+          <Form.Group className="mb-3" controlId="specificCategory">
+            <Form.Select ref={specificCategorieRef}>
+              <option value="">Select Specific Category</option>
+              <option value="exclusive">Exclusive Products</option>
+              <option value="fashion">Fashion Products</option>
+              <option value="featured">Featured Products</option>
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="productDescription">
             <Form.Control
               type="text"
-              placeholder="Enter product discription"
+              placeholder="Enter product description"
               ref={productDiscRef}
             />
           </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer style={{ display: "flex", justifyContent: "center" }}>
-        <Button variant="primary" onClick={addProductHandler}>
+        <Button variant="primary" onClick={addOrEditProductHandler}>
           {isLoading ? <Loader /> : "Submit"}
         </Button>
       </Modal.Footer>

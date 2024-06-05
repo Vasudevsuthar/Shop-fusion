@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import Card from "./Card";
 import "./Card.css";
+import MainContext from "../store/main-context";
 
 const productData = [
   {
@@ -145,14 +147,17 @@ const productData = [
 ];
 
 const HomePageProductcard = () => {
-  const exclusiveProduct = productData.filter(
-    (product) => product.trendingProductName === "Exclusive"
+  const mainCtx = useContext(MainContext);
+  const prodData = mainCtx.productData;
+  console.log(prodData);
+  const exclusiveProduct = prodData.filter(
+    (product) => product.specificCategorie === "Exclusive Products"
   );
-  const fashionProduct = productData.filter(
-    (product) => product.trendingProductName === "Fashion"
+  const fashionProduct = prodData.filter(
+    (product) => product.tspecificCategorie === "Fashion Products"
   );
-  const featuredProduct = productData.filter(
-    (product) => product.trendingProductName === "Featured"
+  const featuredProduct = prodData.filter(
+    (product) => product.specificCategorie === "Featured Products"
   );
 
   return (

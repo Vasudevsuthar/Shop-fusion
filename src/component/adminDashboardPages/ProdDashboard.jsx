@@ -4,13 +4,19 @@ import { AiOutlineDelete } from "react-icons/ai";
 import AddProductModal from "../addProducrModal/AddProductModal";
 import "./Dashboard.css";
 import MainContext from "../store/main-context";
-
+import toast from "react-hot-toast";
 
 const ProdDashboard = () => {
   const mainCtx = useContext(MainContext);
   const prodData = mainCtx.productData;
+  console.log(prodData);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState(null);
+
   const handleComposeClick = () => {
+    setIsEditMode(false);
+    setCurrentProduct(null);
     setShowAddProductModal(true);
   };
 
@@ -18,6 +24,32 @@ const ProdDashboard = () => {
     setShowAddProductModal(false);
   };
 
+  const handleEditClick = (product) => {
+    setIsEditMode(true);
+    setCurrentProduct(product);
+    setShowAddProductModal(true);
+  };
+
+  
+  const prodDeleteHandler = async (prodId) => {
+    try {
+      const response = await fetch(`https://shop-fushion-default-rtdb.firebaseio.com/productData/${prodId}.json`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        toast.success("Product Delete successfully")
+        await mainCtx.fetchProductData();
+      } else {
+        console.error("Failed to delete product");
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
 
   return (
     <div className="all-prod">
@@ -40,19 +72,27 @@ const ProdDashboard = () => {
             <p>{item.category}</p>
             <p>{item.price}</p>
             <div className="action-button">
-              <button onClick={handleComposeClick}>
+              <button onClick={() => handleEditClick(item)}>
                 <FiEdit />
               </button>
-              <button>
+              <button onClick={() => prodDeleteHandler(item.id)}>
                 <AiOutlineDelete />
               </button>
             </div>
           </div>
         ))}
       </>
-      {showAddProductModal && <AddProductModal onClose={handleCloseAddProdModal} />}
-    </div>
 
+      
+      {showAddProductModal && (
+        <AddProductModal
+          onClose={handleCloseAddProdModal}
+          isEditMode={isEditMode}
+          productData={currentProduct}
+          onSubmit={mainCtx.fetchProductData} // Refresh the product data after add/edit
+        />
+      )}
+    </div>
   );
 };
 

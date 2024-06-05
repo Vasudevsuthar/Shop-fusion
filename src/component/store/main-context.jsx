@@ -22,6 +22,10 @@ export const MainContextProvider = (props) => {
     fetchUserData();
   }, [userId]);
 
+  useEffect(() => {
+    fetchUserData();
+  }, [userId]);
+
   const fetchUserData = async () => {
     if (userId) {
       try {
@@ -52,7 +56,10 @@ export const MainContextProvider = (props) => {
         throw new Error("Failed to fetch user data.");
       }
       const data = await response.json();
-      const transformedData = Object.values(data);
+      const transformedData = Object.keys(data).map((key) => ({
+        id: key,
+        ...data[key],
+      }));
       console.log(transformedData);
       setUsersData(transformedData);
     } catch (error) {

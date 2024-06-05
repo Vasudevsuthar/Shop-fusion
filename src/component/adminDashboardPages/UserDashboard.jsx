@@ -1,44 +1,33 @@
 import { AiOutlineDelete } from "react-icons/ai";
 import React, { useContext } from "react";
 import MainContext from "../store/main-context";
-
-const userData = [
-  {
-    name: "user",
-    id: 1,
-    email: "test@gmail.com",
-    mob: 2365896523,
-  },
-  {
-    name: "user",
-    id: 2,
-    email: "test@gmail.com",
-    mob: 2365896523,
-  },
-  {
-    name: "user",
-    id: 3,
-    email: "test@gmail.com",
-    mob: 2365896523,
-  },
-  {
-    name: "user",
-    id: 4,
-    email: "test@gmail.com",
-    mob: 2365896523,
-  },
-  {
-    name: "user",
-    id: 5,
-    email: "test@gmail.com",
-    mob: 2365896523,
-  },
-];
+import toast from "react-hot-toast";
 
 const UserDashboard = () => {
   const mainCtx = useContext(MainContext);
   const usersData = mainCtx.usersData;
   console.log(usersData);
+
+  const userDeleteHandler = async (userId) => {
+    try {
+      const response = await fetch(`https://shop-fushion-default-rtdb.firebaseio.com/usersData/${userId}.json`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        toast.success("user Delete successfully")
+        await mainCtx.fetchUsersData();
+      } else {
+        console.error("Failed to delete user");
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
+
+
   return (
     <div className="all-prod">
       <div className="prod-table-head">
@@ -59,13 +48,13 @@ const UserDashboard = () => {
                 whiteSpace: "nowrap",
               }}
             >
-              {item.userId}
+              {item.id}
             </p>
             <p>{item.firstName}</p>
             <p>{item.email}</p>
             <p>{item.mobileNumber}</p>
             <div className="action-button">
-              <button>
+              <button onClick={() => userDeleteHandler(item.id)}>
                 <AiOutlineDelete />
               </button>
             </div>
