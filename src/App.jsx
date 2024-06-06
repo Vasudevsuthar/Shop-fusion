@@ -8,6 +8,7 @@ import Account from "./page/account/Account";
 import SingleProduct from "./page/singleProduct/SingleProduct";
 import OrderPage from "./page/orderPage/OrderPage";
 import AdminDashboard from "./page/adminDashboard/AdminDashboard";
+import CategoryPage from "./page/category/CategoryPage";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/singleprod" element={<SingleProduct />} />
             <Route path="/order" element={<OrderPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/category/:categoryname" element={<CategoryPage />} />
           </Routes>
           <Toaster />
         </Router>

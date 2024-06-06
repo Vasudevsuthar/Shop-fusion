@@ -112,8 +112,12 @@ const AddProductModal = ({ onClose, isEditMode, productData, onSubmit }) => {
             <Form.Select ref={productCategoryRef}>
               <option value="">Select Product Category</option>
               <option value="electronics">Electronics</option>
-              <option value="clothing">Clothing</option>
-              <option value="home-appliances">Home Appliances</option>
+              <option value="man">Man</option>
+              <option value="women">Women</option>
+              <option value="mobile">Mobile</option>
+              <option value="kids">Kids</option>
+              <option value="home">Home</option>
+              <option value="books">Books</option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3" controlId="specificCategory">

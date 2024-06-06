@@ -10,10 +10,13 @@ import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
 import OrderDashboard from "../../component/adminDashboardPages/OrderDashboard";
 import UserDashboard from "../../component/adminDashboardPages/UserDashboard";
 import ProdDashboard from "../../component/adminDashboardPages/ProdDashboard";
+import MainContext from "../../component/store/main-context";
 
 const AdminDashboard = () => {
   const authCtx = useContext(AuthContext);
   const email = authCtx.email;
+  const mainCtx = useContext(MainContext);
+  const prodData = mainCtx.productData;
 
 
   return (
@@ -37,7 +40,7 @@ const AdminDashboard = () => {
             <Tab className="total-product">
               <TbBasket className="prod-icon" />
               <h5>Total Product</h5>
-              <span>10</span>
+              <span>{prodData.length}</span>
             </Tab>
             <Tab className="total-product">
               <FaClipboardList className="prod-icon" />

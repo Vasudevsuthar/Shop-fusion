@@ -66,8 +66,13 @@ const ProdDashboard = () => {
       </div>
       <>
         {prodData.map((item, index) => (
-          <div className="prod-details" key={index}>
-            <p>{item.name}</p>
+          <div className="prod-details" key={index} >
+            <p style={{
+                width: "100%",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}>{item.name}</p>
             <p>{item.id}</p>
             <p>{item.category}</p>
             <p>{item.price}</p>
