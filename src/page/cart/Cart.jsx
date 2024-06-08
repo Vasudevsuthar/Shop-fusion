@@ -1,32 +1,39 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Layout from "../../component/layout/Layout";
 import "./Cart.css";
-
-const cardProd = [
-  {
-    name: "Fashion",
-    image:
-      "https://i.pinimg.com/564x/3e/05/ce/3e05cefbc7eec79ac175ea8490a67939.jpg",
-    price: 99,
-    qty: 1,
-  },
-  {
-    name: "Shirt",
-    image:
-      "https://i.pinimg.com/736x/e4/61/f2/e461f2246b6ad93e2099d98780626396.jpg",
-    price: 99,
-    qty: 1,
-  },
-];
+import CartContext from "../../component/cartContext/Context";
 
 const Cart = () => {
+  const cartCtx = useContext(CartContext);
+  const cartItems = cartCtx.items;
+  const [loadingItemId, setLoadingItemId] = useState(null);
+  const [loadingType, setLoadingType] = useState(null);
+
+  const addToCartHandler = (item) => {
+    setLoadingItemId(item._id);
+    setLoadingType("add");
+    setTimeout(() => {
+      setLoadingItemId(null);
+      cartCtx.addItem({ ...item, quantity: 1 });
+    }, 2000);
+  };
+
+  const removeItemHandler = (item) => {
+    setLoadingItemId(item._id);
+    setLoadingType("remove");
+    setTimeout(() => {
+      setLoadingItemId(null);
+      cartCtx.removeItem(item);
+    }, 2000);
+  };
+
   return (
     <Layout>
       <div className="bag">
         <div className="cart-heading">
           <h2>Shopping Bag</h2>
           <p>
-            <strong>2 items</strong> in your bag.
+            <strong>{cartItems.length} product{cartItems.length > 1 ? 's' : ''}</strong> in your bag.
           </p>
         </div>
         <div className="main-bag">
@@ -41,59 +48,85 @@ const Cart = () => {
                 </tr>
               </thead>
               <tbody>
-                {cardProd.map((prod) => (
-                  <tr key={prod.name}>
-                    <td className="prod-img">
+                {cartItems.map((item) => (
+                  <tr key={item._id}>
+                    <td className="prod">
                       <div>
-                        <img src={prod.image} alt="" />
+                        <img src={item.image} alt="" />
                       </div>
                       <div>
-                        <h5>{prod.name}</h5>
+                        <h5>{item.name}</h5>
                       </div>
                     </td>
                     <td>
-                      <span>₹ {prod.price}</span>
+                      <span>₹ {item.price}</span>
                     </td>
                     <td>
                       <div className="qty">
-                        <button>+</button>
-                        <p>{prod.qty}</p>
-                        <button>-</button>
+                        <button
+                          onClick={() => addToCartHandler(item)}
+                          disabled={loadingItemId === item._id && loadingType === "add"}
+                          className={loadingItemId === item._id && loadingType === "add" ? "loading" : ""}
+                        >
+                          +
+                        </button>
+                        <p>{item.quantity}</p>
+                        <button
+                          onClick={() => removeItemHandler(item)}
+                          disabled={loadingItemId === item._id && loadingType === "remove"}
+                          className={loadingItemId === item._id && loadingType === "remove" ? "loading" : ""}
+                        >
+                          -
+                        </button>
                       </div>
                     </td>
-                    <td>₹ 999</td>
+                    <td>₹ {item.price * item.quantity}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="cart-details">
-            <div className="address">
-              <h5>Calculated Shipping</h5>
-              <input type="text" placeholder="Country" />
-              <input type="text" placeholder="State" />
-              <div className="add">
-                <input type="text" placeholder="District" />
-                <input type="number" placeholder="Pin Code" />
-              </div>
-            </div>
-            <div className="cart-total">
-              <h5>Cart Total</h5>
-              <div className="cart-summary">
-                <div className="subtotal">
-                  <div>Cart SubTotal</div>
-                  <div>₹999</div>
-                </div>
-                <div className="subtotal">
-                  <div>Delivery Charges</div>
-                  <div>Free</div>
-                </div>
-                <div className="total">
-                  <div>Cart Total</div>
-                  <div>₹999</div>
+          <div className="cart-details-wrapper">
+            <div className="cart-details">
+              <div className="address">
+                <h5>Calculated Shipping</h5>
+                <input type="text" placeholder="Country" />
+                <input type="text" placeholder="State" />
+                <div className="add">
+                  <input type="text" placeholder="District" />
+                  <input type="number" placeholder="Pin Code" />
                 </div>
               </div>
-              <button className="apply">PLACE ORDER</button>
+              <div className="cart-total">
+                <h5>Cart Total</h5>
+                <div className="cart-summary">
+                  <div className="subtotal">
+                    <div>Cart SubTotal</div>
+                    <div>
+                      ₹
+                      {cartItems.reduce(
+                        (total, item) => total + item.price * item.quantity,
+                        0
+                      )}
+                    </div>
+                  </div>
+                  <div className="subtotal">
+                    <div>Delivery Charges</div>
+                    <div>Free</div>
+                  </div>
+                  <div className="total">
+                    <div>Cart Total</div>
+                    <div>
+                      ₹
+                      {cartItems.reduce(
+                        (total, item) => total + item.price * item.quantity,
+                        0
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <button className="apply">PLACE ORDER</button>
+              </div>
             </div>
           </div>
         </div>

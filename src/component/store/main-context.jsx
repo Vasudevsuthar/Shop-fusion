@@ -1,4 +1,3 @@
-// main-context.jsx
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "./auth-context";
 

@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../img/logo.avif";
 import Profile from "../profile/Profile";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import "./Navbar.css";
 import SearchBar from "../searchBar/SearchBar";
 import { useNavigate } from "react-router-dom";
+import CartContext from "../cartContext/Context";
 
 function Navbar() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const cartCtx = useContext(CartContext)
+  const cartItems = cartCtx.items;
   return (
     <div>
       <nav>
@@ -22,6 +25,9 @@ function Navbar() {
           <div className="profile">
               <Profile className="acc" />
               <MdOutlineShoppingCart className="cart" onClick={() => navigate("/cart")}/>
+                <div className="cart-item">
+                <span>{cartItems.length}</span>
+                </div>
           </div>
         </div>
       </nav>

@@ -44,6 +44,17 @@
   cursor: pointer;
 }
 
+.cart-item{
+  font-size: 10px;
+  font-weight: bold;
+  margin-top: -15px;
+  margin-left: -25px;
+  padding: 0 4px;
+  color: #eff3f6;
+  background-color: #249bf7;
+  border-radius: 50%;
+}
+
 
 
 @media (max-width: 1200px) {

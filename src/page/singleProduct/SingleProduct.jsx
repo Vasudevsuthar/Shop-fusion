@@ -1,33 +1,83 @@
+import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import Layout from "../../component/layout/Layout";
+import MainContext from "../../component/store/main-context";
+import CartContext from "../../component/cartContext/Context";
+import Loader from "../../component/loader/Loader"; 
 import "./SingleProduct.css";
 
 const SingleProduct = () => {
+  const { productid } = useParams();
+  const mainCtx = useContext(MainContext);
+  const cartCtx = useContext(CartContext);
+  const product = mainCtx.productData.find((item) => item.id === productid);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isInCart, setIsInCart] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (product) {
+      const foundItem = cartCtx.items.find((cartItem) => cartItem.name === product.name);
+      setIsInCart(!!foundItem);
+    }
+  }, [cartCtx.items, product]);
+
+  if (!product) {
+    return (
+      <Layout>
+        <div className="single-prod">
+          <h2>Product not found</h2>
+        </div>
+      </Layout>
+    );
+  }
+
+  const item = {
+    name: product.name,
+    image: product.image,
+    price: product.price,
+    quantity: 1,
+  };
+
+  const addToCartHandler = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      cartCtx.addItem(item);
+    }, 2000);
+  };
+
+  const goToCartHandler = () => {
+    navigate("/cart");
+  };
+
   return (
     <Layout>
       <div className="single-prod">
         <div className="prod-pic">
-          <img
-            src="https://i.pinimg.com/564x/22/80/8d/22808d88ada424962f2e064f3075b2d1.jpg"
-            alt=""
-          />
+          <img src={product.image} alt={product.name} />
         </div>
         <div className="prod-info">
-          <h2>Hand Painted Blue Kaushalam Tea Pot in Aluminium</h2>
-          <p className="prod-dis">
-            Shop Hand Painted Blue Kaushalam Tea Pot in Aluminium, handmade by
-            Mrinalika Jain. Fair pricing. Ethically made. Positive impact.
-          </p>
+          <h2>{product.name}</h2>
+          <p className="prod-dis">{product.description}</p>
           <p className="prod-price">
-            <span>₹ 999.00</span>
+            <span>₹ {product.price}</span>
           </p>
           <div className="prod-button">
-            <div className="qty-button">
-              <button>-</button>
-              <span>1</span>
-              <button>+</button>
-            </div>
             <div className="add-cart">
-              <button>Add to Cart</button>
+              <button
+                onClick={isInCart ? goToCartHandler : addToCartHandler}
+                className={isInCart ? "go-to-cart" : ""}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <Loader />
+                ) : isInCart ? (
+                  "Go to Cart"
+                ) : (
+                  "Add To Cart"
+                )}
+              </button>
             </div>
           </div>
         </div>

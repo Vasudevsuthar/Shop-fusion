@@ -10,24 +10,27 @@ import OrderPage from "./page/orderPage/OrderPage";
 import AdminDashboard from "./page/adminDashboard/AdminDashboard";
 import CategoryPage from "./page/category/CategoryPage";
 import { Toaster } from "react-hot-toast";
+import CartContextProvider from "./component/cartContext/CartProvider";
 
 const App = () => {
   return (
     <div className="app">
-        <Router>
+      <Router>
+        <CartContextProvider>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/account" element={<Account />} />
-            <Route path="/singleprod" element={<SingleProduct />} />
+            <Route path="/singleprod/:productid" element={<SingleProduct />} />
             <Route path="/order" element={<OrderPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/category/:categoryname" element={<CategoryPage />} />
           </Routes>
           <Toaster />
-        </Router>
+        </CartContextProvider>
+      </Router>
     </div>
   );
 };

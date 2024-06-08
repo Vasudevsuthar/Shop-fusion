@@ -25,6 +25,11 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
+    transition: box-shadow 0.3s ease; 
+}
+
+.product:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.324); 
 }
 
 .card-img {
@@ -34,12 +39,8 @@
     border-radius: 4px;
     margin-bottom: 8px;
     cursor: pointer;
-    transition: transform 0.3s ease;
 }
 
-.card-img:hover {
-    transform: scale(1.08);
-}
 
 .card-title {
     font-size: 1rem;
@@ -70,6 +71,14 @@
 .card-btn:hover {
     background-color: #0056b3;
 }
+
+.card-btn.go-to-cart {
+    background-color: #fb641b;
+  }
+  
+  .card-btn.go-to-cart:hover {
+    background-color: #d85018;
+  }
 
 @media (max-width: 1245px) {
     .product-card>div {

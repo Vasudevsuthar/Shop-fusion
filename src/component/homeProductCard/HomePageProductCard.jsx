@@ -1,23 +1,18 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "./Card";
 import "./Card.css";
 import MainContext from "../store/main-context";
-
-
 
 const HomePageProductcard = () => {
   const mainCtx = useContext(MainContext);
   const prodData = mainCtx.productData;
   console.log(prodData);
-  const exclusiveProduct = prodData.filter(
-    (product) => product.specificCategorie === "exclusive"
-  );
-  const fashionProduct = prodData.filter(
-    (product) => product.specificCategorie === "fashion"
-  );
-  const featuredProduct = prodData.filter(
-    (product) => product.specificCategorie === "featured"
-  );
+  const navigate = useNavigate();
+
+  const exclusiveProduct = prodData.filter(product => product.specificCategorie === "exclusive");
+  const fashionProduct = prodData.filter(product => product.specificCategorie === "fashion");
+  const featuredProduct = prodData.filter(product => product.specificCategorie === "featured");
 
   return (
     <>
@@ -28,9 +23,10 @@ const HomePageProductcard = () => {
         </div>
         <div className="product-card">
           <div>
-            {exclusiveProduct.map((item, index) => (
+            {exclusiveProduct.map(item => (
               <Card
-                key={index}
+                key={item.id}
+                id={item.id}
                 title={item.name}
                 image={item.image}
                 price={item.price}
@@ -46,9 +42,10 @@ const HomePageProductcard = () => {
         </div>
         <div className="product-card">
           <div>
-            {fashionProduct.map((item, index) => (
+            {fashionProduct.map(item => (
               <Card
-                key={index}
+                key={item.id}
+                id={item.id}
                 title={item.name}
                 image={item.image}
                 price={item.price}
@@ -64,9 +61,10 @@ const HomePageProductcard = () => {
         </div>
         <div className="product-card">
           <div>
-            {featuredProduct.map((item, index) => (
+            {featuredProduct.map(item => (
               <Card
-                key={index}
+                key={item.id}
+                id={item.id}
                 title={item.name}
                 image={item.image}
                 price={item.price}

@@ -27,7 +27,7 @@ const category = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9jzKNZw84mH-K18T17Kxx8Ai6sHlXl5viBQ&s",
   },
   {
-    name: "mobiles",
+    name: "mobile",
     imgUrl:
       "https://img.freepik.com/premium-vector/new-version-black-smartphone-with-blank-white-screen_115464-125.jpg?w=740",
   },

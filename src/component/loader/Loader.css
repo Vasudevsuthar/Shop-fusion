@@ -3,7 +3,7 @@
     --w: 10ch;
     text-align: center;
     font-family: monospace;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 1.2em;
     letter-spacing: var(--w);
     width: var(--w);
