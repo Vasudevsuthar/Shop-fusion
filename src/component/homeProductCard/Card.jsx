@@ -21,7 +21,6 @@ const Card = (product) => {
     const foundItem = cartCtx.items.find(
       (cartItem) => cartItem.name === product.title
     );
-    console.log(foundItem);
     setIsInCart(!!foundItem);
   }, [cartCtx.items, product.title]);
 

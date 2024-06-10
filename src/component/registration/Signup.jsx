@@ -3,7 +3,7 @@ import "./Regi.css";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Loader from "../loader/Loader";
-import AuthContext from "../store/auth-context";
+
 
 const SignUp = () => {
   const nameInputRef = useRef();
@@ -11,7 +11,6 @@ const SignUp = () => {
   const passwordInputRef = useRef();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const authCtx = useContext(AuthContext);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -67,7 +66,6 @@ const SignUp = () => {
         const data = await res.json();
         toast.success("Account created successfully");
 
-        const uid = data.localId;
         const formatDate = (date) => {
           const year = date.getFullYear();
           const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -85,7 +83,7 @@ const SignUp = () => {
         };
         const formattedTime = formatTime(new Date());
 
-        await fetch(
+        const userDataResponse = await fetch(
           "https://shop-fushion-default-rtdb.firebaseio.com/usersData.json",
           {
             method: "POST",
@@ -94,6 +92,7 @@ const SignUp = () => {
               email: enteredEmail,
               signUpDate: formattedDate,
               signUpTime: formattedTime,
+              role: "user",
             }),
             headers: {
               "Content-Type": "application/json",
@@ -101,7 +100,11 @@ const SignUp = () => {
           }
         );
 
-        authCtx.login(data.idToken, enteredEmail);
+        if (!userDataResponse.ok) {
+          throw new Error("Failed to save user data");
+        }
+
+
         navigate("/login");
         emailInputRef.current.value = "";
         nameInputRef.current.value = "";

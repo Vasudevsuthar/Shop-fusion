@@ -1,6 +1,6 @@
 .order-component {
     display: grid;
-    height: 100vh;
+    height: fit-content;
 }
 
 .order-info {

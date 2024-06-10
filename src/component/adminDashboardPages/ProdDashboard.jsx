@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 const ProdDashboard = () => {
   const mainCtx = useContext(MainContext);
   const prodData = mainCtx.productData;
-  console.log(prodData);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);

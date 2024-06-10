@@ -52,7 +52,7 @@ const UserDashboard = () => {
             </p>
             <p>{item.firstName}</p>
             <p>{item.email}</p>
-            <p>{item.mobileNumber}</p>
+            <p>{item.mobileNumber ? item.mobileNumber : "-"}</p>
             <div className="action-button">
               <button onClick={() => userDeleteHandler(item.id)}>
                 <AiOutlineDelete />

@@ -7,7 +7,6 @@ import MainContext from "../store/main-context";
 const HomePageProductcard = () => {
   const mainCtx = useContext(MainContext);
   const prodData = mainCtx.productData;
-  console.log(prodData);
   const navigate = useNavigate();
 
   const exclusiveProduct = prodData.filter(product => product.specificCategorie === "exclusive");

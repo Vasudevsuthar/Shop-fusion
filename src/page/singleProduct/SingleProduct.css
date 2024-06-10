@@ -1,4 +1,5 @@
 .single-prod{
+    height: 80vh;
     background-color: white;
     padding: 40px 80px;
     margin: 40px;
@@ -10,7 +11,8 @@
 }
 
 .prod-pic{
-    width: 50%;
+    width: fit-content;
+    height: fit-content;
     margin-right: -80px;
 }
 
@@ -87,11 +89,18 @@
 @media(max-width: 696px){
     .single-prod{
         display: grid;
+        justify-items: center;
     }
 
     .prod-pic {
         display: flex;
         justify-content: center;
+        margin: 0;
+    }
+
+    .prod-pic{
+        width: 100%;
+        height: 80%;
     }
 
     .prod-button{

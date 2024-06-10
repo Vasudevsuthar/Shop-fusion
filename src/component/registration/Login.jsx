@@ -11,6 +11,7 @@ const Login = () => {
   const passwordInputRef = useRef();
   const authCtx = useContext(AuthContext);
   const mainCtx = useContext(MainContext);
+  const user = JSON.parse(localStorage.getItem("userData"));
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -53,9 +54,9 @@ const Login = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
-          authCtx.login(data.idToken, enteredEmail, data.localId);
-          mainCtx.fetchUserData(data.localId);
+          authCtx.login(data.idToken, enteredEmail);
+          mainCtx.fetchUsersData();
+          mainCtx.findUserDataByEmail(enteredEmail);
           toast.success("Login successful");
           navigate("/");
         } else {

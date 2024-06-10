@@ -11,6 +11,13 @@
     font-weight: bolder;
 }
 
+.empty-cart{
+    display: flex;
+    justify-content: center;
+    height: 80vh;
+}
+
+
 .main-bag {
     display: flex;
     gap: 50px;
@@ -20,6 +27,7 @@
     background-color: white;
     border-radius: 20px;
     width: 50rem;
+    height: 100%;
     padding: 20px;
     padding-bottom: 0;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);

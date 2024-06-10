@@ -1,14 +1,12 @@
 .category-page{
-    height: 100vh;
+    height: auto;
     margin: 40px;
-    /* background-color: white; */
 }
 
 .category-page h1{
     text-align: center;
     text-transform: uppercase;
-    margin-top: -18px;
-    margin-bottom: 20px;
+    
     font-weight: 700;
     font-family: "Cinzel", serif;
 }
@@ -23,4 +21,16 @@
 .not-found-prod img{
     width: 80%;
     height: 80%;
+}
+
+@media (max-width: 749px){
+    .category-page{
+        margin: 20px;
+    }
+}
+
+@media (max-width: 602px){
+    .category-page{
+        margin: 20px 0;
+    }
 }

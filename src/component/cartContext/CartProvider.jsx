@@ -2,15 +2,21 @@ import { useContext, useEffect, useState } from "react";
 import CartContext from "./Context";
 import AuthContext from "../store/auth-context";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CartContextProvider = (props) => {
   const authCtx = useContext(AuthContext);
   const email = authCtx.email;
   const cleanedEmail = email.replace(/[@.]/g, "");
-
   const [items, setItems] = useState([]);
+  const navigate = useNavigate();
 
   const addToCart = async (product) => {
+    if (!authCtx.isLoggedIn) {
+      toast.error("Please log in to add items to the cart.");
+      navigate("/login");
+      return;
+    }
     try {
       const updatedItemsArray = [...items];
       const existingItemIndex = updatedItemsArray.findIndex(
@@ -130,6 +136,7 @@ const CartContextProvider = (props) => {
 
   const fetchCartData = async () => {
     try {
+      if (!cleanedEmail) return;
       const response = await fetch(
         `https://shop-fushion-default-rtdb.firebaseio.com/cart/${cleanedEmail}.json`
       );
@@ -151,6 +158,31 @@ const CartContextProvider = (props) => {
     }
   };
 
+  const clearCartFromBackend = async (email) => {
+    try {
+      const response = await fetch(
+        `https://shop-fushion-default-rtdb.firebaseio.com/cart/${email}.json`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        await fetchCartData(email);
+      } else {
+        console.error("Failed to cart item delete");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const clearCartFromLocalStorage = () => {
+    setItems([]);
+  };
+
   useEffect(() => {
     fetchCartData();
   }, [cleanedEmail]);
@@ -159,6 +191,8 @@ const CartContextProvider = (props) => {
     items: items,
     addItem: addToCart,
     removeItem: removeToCart,
+    clearCart: clearCartFromLocalStorage,
+    clearCartFromBackend: clearCartFromBackend,
   };
 
   return (

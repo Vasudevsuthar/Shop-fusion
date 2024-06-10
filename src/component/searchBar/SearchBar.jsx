@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { GoSearch } from "react-icons/go";
 import notfound from "../img/notfound.png";
 import "./SearchBar.css";
+import MainContext from "../store/main-context";
 
 const searchDate = [
   {
@@ -45,11 +46,12 @@ const SearchBar = () => {
   const [search, setSearch] = useState("");
   const [showResult, setShowResult] = useState(false);
   const searchRef = useRef(null);
+  const mainCtx = useContext(MainContext);
+  const allProduct = mainCtx.productData;
 
-  const filterSearchDate = searchDate
-    .filter((obj) => obj.name.toLocaleLowerCase().includes(search))
+  const filterSearchDate = allProduct
+    .filter((obj) => obj.name.toLowerCase().includes(search.toLowerCase()))
     .slice(0, 8);
-
   useEffect(() => {
     const clickOutsideHandle = (e) => {
       if (searchRef.current && !searchRef.current.contains(e.target)) {

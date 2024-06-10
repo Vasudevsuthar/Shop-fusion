@@ -14,14 +14,20 @@ const Account = () => {
   const numberInputRef = useRef();
   const [selectedOption, setSelectedOption] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const authCtx = useContext(AuthContext);
   const mainCtx = useContext(MainContextProvider);
-  const userData = mainCtx.userData || {};
-  const userId = userData.userId;
+  const userData = mainCtx.userData;
+  const userId = userData.id;
+  const userEmail = userData.email;
+  const toastShownRef = useRef(false);
 
   useEffect(() => {
     if (userData.gender) {
       setSelectedOption(userData.gender);
+    }
+
+    if (!toastShownRef.current && (!userData.lastName || !userData.mobileNumber || !userData.gender)) {
+      toast.error("Please upload your personal details");
+      toastShownRef.current = true; 
     }
   }, [userData]);
 
@@ -45,7 +51,11 @@ const Account = () => {
 
     const mobileRegex = /^[0-9]{10}$/;
 
-    if (!updatedData.gender || !updatedData.mobileNumber || !mobileRegex.test(updatedData.mobileNumber)) {
+    if (
+      !updatedData.gender ||
+      !updatedData.mobileNumber ||
+      !mobileRegex.test(updatedData.mobileNumber)
+    ) {
       toast.error("Please fill in all fields correctly");
       return;
     }
@@ -76,7 +86,8 @@ const Account = () => {
 
         const data = await res.json();
         toast.success("Profile updated successfully");
-        mainCtx.fetchUserData(userId);
+        mainCtx.fetchUsersData();
+        mainCtx.findUserDataByEmail(userEmail);
       } catch (err) {
         toast.error(err.message);
       } finally {

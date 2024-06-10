@@ -11,12 +11,14 @@ const Profile = () => {
   const [isHovered, setIsHovered] = useState(false);
   const authCtx = useContext(AuthContext);
   const userIsLoggedIn = authCtx.isLoggedIn;
+  const user = JSON.parse(localStorage.getItem("userData"));
   const navigate = useNavigate();
 
   const logoutHandler = () => {
     authCtx.logout();
     setIsHovered(false);
-  }
+    navigate("/");
+  };
 
   return (
     <div
@@ -30,12 +32,24 @@ const Profile = () => {
           <ul>
             {userIsLoggedIn && (
               <>
-                <li onClick={() => navigate("/account")}>
-                  <MdOutlineAccountCircle /> My Profile
-                </li>
-                <li onClick={() => navigate("/order")}>
-                  <BsBoxSeam /> Orders
-                </li>
+                {user?.role === "user" && (
+                  <li onClick={() => navigate("/userDashboard")}>
+                    <MdOutlineAccountCircle /> My Profile
+                  </li>
+                )}
+
+                {user?.role === "admin" && (
+                  <li onClick={() => navigate("/adminDashboard")}>
+                    <MdOutlineAccountCircle /> DashBoard
+                  </li>
+                )}
+
+                {user?.role === "user" && (
+                  <li onClick={() => navigate("/order")}>
+                    <BsBoxSeam /> Orders
+                  </li>
+                )}
+
                 <li onClick={logoutHandler}>
                   <MdLogout /> Logout
                 </li>

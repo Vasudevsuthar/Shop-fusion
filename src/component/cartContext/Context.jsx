@@ -5,6 +5,7 @@ const Context = React.createContext({
   addItem: (prod) => {},
   removeItem: (id) => {},
   clearCart: () => {},
+  clearCartFromBackend: (email) => {},
 });
 
 export default Context;

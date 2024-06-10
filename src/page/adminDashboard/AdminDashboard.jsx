@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProfileImg from "../../component/img/Profile.png";
 import AuthContext from "../../component/store/auth-context";
 import Layout from "../../component/layout/Layout";
@@ -16,7 +16,17 @@ const AdminDashboard = () => {
   const authCtx = useContext(AuthContext);
   const email = authCtx.email;
   const mainCtx = useContext(MainContext);
+  const usersData = mainCtx.usersData;
   const prodData = mainCtx.productData;
+  const orderData = mainCtx.orderData;
+  const user = JSON.parse(localStorage.getItem("userData"));
+  const name = user.firstName;
+  const [totalItems, setTotalItems] = useState(0);
+
+  useEffect(() => {
+    const total = orderData.reduce((sum, order) => sum + order.cartItems.length, 0);
+    setTotalItems(total);
+  }, [orderData]);
 
 
   return (
@@ -28,7 +38,7 @@ const AdminDashboard = () => {
         <div className="admin-profile">
           <img src={ProfileImg} alt="" />
           <p>
-            <strong>Name : </strong>Vasudev
+            <strong>Name : </strong>{name}
           </p>
           <p>
             <strong>Email : </strong>
@@ -45,12 +55,12 @@ const AdminDashboard = () => {
             <Tab className="total-product">
               <FaClipboardList className="prod-icon" />
               <h5>Total Order</h5>
-              <span>10</span>
+              <span>{totalItems}</span>
             </Tab>
             <Tab className="total-product">
               <FaUsers className="prod-icon" />
               <h5>Total User</h5>
-              <span>10</span>
+              <span>{usersData.length}</span>
             </Tab>
           </TabList>
           <TabPanel><ProdDashboard /></TabPanel>

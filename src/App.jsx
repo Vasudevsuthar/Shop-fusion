@@ -11,6 +11,8 @@ import AdminDashboard from "./page/adminDashboard/AdminDashboard";
 import CategoryPage from "./page/category/CategoryPage";
 import { Toaster } from "react-hot-toast";
 import CartContextProvider from "./component/cartContext/CartProvider";
+import { ProtectedRouteForAdmin } from "./protectedRoute/ProtectedRouteForAdmin";
+import { ProtectedRouteForUser } from "./protectedRoute/ProtectedRouteForUser";
 
 const App = () => {
   return (
@@ -22,10 +24,24 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/account" element={<Account />} />
+            <Route
+              path="/userDashboard"
+              element={
+                <ProtectedRouteForUser>
+                  <Account />
+                </ProtectedRouteForUser>
+              }
+            />
             <Route path="/singleprod/:productid" element={<SingleProduct />} />
             <Route path="/order" element={<OrderPage />} />
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route
+              path="/adminDashboard"
+              element={
+                <ProtectedRouteForAdmin>
+                  <AdminDashboard />
+                </ProtectedRouteForAdmin>
+              }
+            />
             <Route path="/category/:categoryname" element={<CategoryPage />} />
           </Routes>
           <Toaster />

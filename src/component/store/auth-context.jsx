@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import toast from "react-hot-toast";
+import Context from "../cartContext/Context";
 
 const AuthContext = React.createContext({
   token: "",
@@ -14,6 +15,7 @@ export const AuthContextProvider = (props) => {
   let initialToken = localStorage.getItem("token");
   let initialEmail = localStorage.getItem("email");
   let initialUid = localStorage.getItem("uid");
+  const cartCtx = useContext(Context);
 
   const [token, setToken] = useState(initialToken);
   const [email, setEmail] = useState(initialEmail);
@@ -25,10 +27,9 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem("uid", uid);
   }, [token, email, uid]);
 
-  function loginHandler(token, email, uid) {
+  function loginHandler(token, email) {
     setToken(token);
     setEmail(email);
-    setUid(uid);
   }
 
   const userIsLoggedIn = !!token;
@@ -36,10 +37,15 @@ export const AuthContextProvider = (props) => {
   const logoutHandler = () => {
     setToken(null);
     setEmail(null);
+    setUid(null);
     localStorage.removeItem("token");
     localStorage.removeItem("email");
+    localStorage.removeItem("uid");
+    localStorage.removeItem("userData");
+    cartCtx.clearCart();
     setToken("");
     setEmail("");
+    setUid("");
     toast.success("You have been logged out.");
   };
 
