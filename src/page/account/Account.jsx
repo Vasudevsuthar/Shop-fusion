@@ -47,6 +47,7 @@ const Account = () => {
       signUpDate: userData.signUpDate,
       signUpTime: userData.signUpTime,
       userId: userData.userId,
+      role:"user",
     };
 
     const mobileRegex = /^[0-9]{10}$/;

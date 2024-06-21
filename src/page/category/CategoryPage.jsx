@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../component/layout/Layout";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./CategoryPage.css";
 import MainContext from "../../component/store/main-context";
 import Card from "../../component/homeProductCard/Card";
@@ -11,6 +11,7 @@ const Category = () => {
   const mainCtx = useContext(MainContext);
   const prodData = mainCtx.productData;
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -37,6 +38,7 @@ const Category = () => {
                 <div>
                   {filterProdData.map((item, index) => (
                     <Card
+                      id={item.id}
                       key={index}
                       title={item.name}
                       image={item.image}

@@ -146,3 +146,11 @@
             calc(-5*var(--w)) 1.2em #000, calc(-6*var(--w)) 1.2em #000, calc(-7*var(--w)) 1.2em #000, calc(-8*var(--w)) 1.2em #000, calc(-9*var(--w)) 1.2em #000
     }
 }
+
+
+
+@media(max-width:558px){
+    .loader{
+        font-size: 15px;
+    }
+}

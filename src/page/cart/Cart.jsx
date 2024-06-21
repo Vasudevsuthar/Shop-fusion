@@ -4,14 +4,16 @@ import "./Cart.css";
 import CartContext from "../../component/cartContext/Context";
 import MainContext from "../../component/store/main-context";
 import toast from "react-hot-toast";
+import Loader from "../../component/loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const cartCtx = useContext(CartContext);
   const mainCtx = useContext(MainContext);
   const userData = mainCtx.userData;
   const cartItems = cartCtx.items;
-  const email = userData.email;
-  const cleanedEmail = email.replace(/[@.]/g, "");
+  const email = userData?.email;
+  const cleanedEmail = email ? email.replace(/[@.]/g, "") : "";
   const countryRef = useRef();
   const stateRef = useRef();
   const districtRef = useRef();
@@ -22,6 +24,8 @@ const Cart = () => {
     (total, item) => total + item.price * item.quantity,
     0
   );
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const addToCartHandler = (item) => {
     setLoadingItemId(item._id);
@@ -47,7 +51,6 @@ const Cart = () => {
     const district = districtRef.current.value;
     const pinCode = pincodeRef.current.value;
 
-
     const orderData = {
       cartItems,
       name: userData.firstName,
@@ -67,17 +70,20 @@ const Cart = () => {
       return;
     }
 
-    try {
-      const response = await fetch(
-        `https://shop-fushion-default-rtdb.firebaseio.com/orders/${cleanedEmail}.json`,
-        {
-          method:"POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(orderData),
-        });
-        if(!response.ok){
+    setIsLoading(true);
+    setTimeout(async () => {
+      try {
+        const response = await fetch(
+          `https://shop-fushion-default-rtdb.firebaseio.com/orders/${cleanedEmail}.json`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(orderData),
+          }
+        );
+        if (!response.ok) {
           throw new Error("Failed to place order");
         }
 
@@ -86,11 +92,13 @@ const Cart = () => {
         toast.success("Order placed successfully");
         cartCtx.clearCartFromBackend(cleanedEmail);
         mainCtx.fetchOrderDataForUser();
-    } catch (error) {
-      console.error(error);
-    }
+      } catch (error) {
+        console.error(error);
+      }finally{
+        setIsLoading(false);
+      }
+    },1500);
   };
-
 
   return (
     <Layout>
@@ -107,6 +115,7 @@ const Cart = () => {
         {cartItems.length === 0 ? (
           <div className="empty-cart">
             <h4>Please add product in your cart</h4>
+            <button onClick={() => navigate("/")}>Home</button>
           </div>
         ) : (
           <div className="main-bag">
@@ -217,7 +226,9 @@ const Cart = () => {
                       </div>
                     </div>
                   </div>
-                  <button className="apply" onClick={placeOrderHandler}>PLACE ORDER</button>
+                  <button className="apply" onClick={placeOrderHandler}>
+                    {isLoading ? <Loader/> : "Place Order"}
+                  </button>
                 </div>
               </div>
             </div>

@@ -1,12 +1,11 @@
 .category-page{
-    height: auto;
+    height: 100vh;
     margin: 40px;
 }
 
 .category-page h1{
     text-align: center;
     text-transform: uppercase;
-    
     font-weight: 700;
     font-family: "Cinzel", serif;
 }
@@ -32,5 +31,6 @@
 @media (max-width: 602px){
     .category-page{
         margin: 20px 0;
+        height: 100%;
     }
 }

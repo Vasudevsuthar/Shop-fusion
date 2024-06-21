@@ -11,7 +11,6 @@ const Login = () => {
   const passwordInputRef = useRef();
   const authCtx = useContext(AuthContext);
   const mainCtx = useContext(MainContext);
-  const user = JSON.parse(localStorage.getItem("userData"));
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,7 +48,6 @@ const Login = () => {
               "Content-Type": "application/json",
             },
           },
-          3000
         );
 
         if (response.ok) {
@@ -57,6 +55,7 @@ const Login = () => {
           authCtx.login(data.idToken, enteredEmail);
           mainCtx.fetchUsersData();
           mainCtx.findUserDataByEmail(enteredEmail);
+          mainCtx.fetchOrderDataForUser();
           toast.success("Login successful");
           navigate("/");
         } else {

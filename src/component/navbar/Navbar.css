@@ -20,6 +20,7 @@
 .logoimg {
   height: 3rem;
   width: 4rem;
+  margin-right: 10px;
 }
 
 .heading {
@@ -28,6 +29,7 @@
   font-family: "Cinzel", serif;
   flex-shrink: 0;
   white-space: nowrap;
+  font-weight: bold;
 }
 
 .profile {
@@ -67,6 +69,9 @@
   .navbar {
     padding: 5px 20px; 
     font-size: medium;
+  }
+  .logo{
+    margin: 0;
   }
   .profile {
     font-size: large;
@@ -110,5 +115,11 @@
     font-size: x-large;
     column-gap: 10px;
     margin-right: 0;
+  }
+}
+
+@media (max-width: 335px){
+  .profile{
+    margin: 0;
   }
 }

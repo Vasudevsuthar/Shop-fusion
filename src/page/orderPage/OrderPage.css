@@ -11,6 +11,11 @@
     font-weight: 700;
 }
 
+.empty-order{
+    text-align: center;
+    height: 80vh;
+}
+
 .order-summary {
     display: flex;
     border: 2px solid #d3a8a889;

@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 const UserDashboard = () => {
   const mainCtx = useContext(MainContext);
   const usersData = mainCtx.usersData;
-  console.log(usersData);
 
   const userDeleteHandler = async (userId) => {
     try {

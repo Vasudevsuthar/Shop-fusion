@@ -91,6 +91,10 @@ export const MainContextProvider = (props) => {
         throw new Error("Failed to fetch user data.");
       }
       const data = await response.json();
+      if (!data) {
+        setOrderDataForUser([]);
+        return;
+      }
       const transformedData = Object.keys(data).map((key) => ({
         id: key,
         ...data[key],

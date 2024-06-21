@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const CartContextProvider = (props) => {
   const authCtx = useContext(AuthContext);
   const email = authCtx.email;
-  const cleanedEmail = email.replace(/[@.]/g, "");
+  const cleanedEmail = email ? email.replace(/[@.]/g, "") : "";
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
 
@@ -135,8 +135,11 @@ const CartContextProvider = (props) => {
   };
 
   const fetchCartData = async () => {
+    if (!cleanedEmail) {
+      setItems([]); // Clear items if no email is present
+      return;
+    }
     try {
-      if (!cleanedEmail) return;
       const response = await fetch(
         `https://shop-fushion-default-rtdb.firebaseio.com/cart/${cleanedEmail}.json`
       );
@@ -158,6 +161,7 @@ const CartContextProvider = (props) => {
     }
   };
 
+
   const clearCartFromBackend = async (email) => {
     try {
       const response = await fetch(
@@ -178,14 +182,15 @@ const CartContextProvider = (props) => {
       console.error(error);
     }
   };
-
-  const clearCartFromLocalStorage = () => {
-    setItems([]);
-  };
-
   useEffect(() => {
     fetchCartData();
   }, [cleanedEmail]);
+
+  const clearCartFromLocalStorage = () => {
+    setItems([]);
+    fetchCartData();
+  };
+
 
   const contextValue = {
     items: items,

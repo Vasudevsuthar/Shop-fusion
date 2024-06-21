@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import logo from "../img/logo.avif";
+import logo from "../img/logo.png";
 import Profile from "../profile/Profile";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import "./Navbar.css";
